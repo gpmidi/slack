@@ -2,6 +2,7 @@ package slack
 
 import (
 	"context"
+	"encoding/json"
 	"fmt"
 	"log"
 	"net/http"
@@ -159,4 +160,13 @@ func (api *Client) postMethod(ctx context.Context, path string, values url.Value
 // get a slack web method.
 func (api *Client) getMethod(ctx context.Context, path string, token string, values url.Values, intf interface{}) error {
 	return getResource(ctx, api.httpclient, api.endpoint+path, token, values, intf, api)
+}
+
+//postJSON post to a slack web method using JSON
+func (api *Client) postJSON(ctx context.Context, path string, request interface{}, response interface{}) error {
+	data, err := json.Marshal(request)
+	if err != nil {
+		return err
+	}
+	return postJSON(ctx, api.httpclient, api.endpoint+path, api.token, data, response, api)
 }
