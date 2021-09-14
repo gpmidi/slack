@@ -16,9 +16,9 @@ const (
 
 // WorkflowInput - https://api.slack.com/reference/workflows/workflow_step#input
 type WorkflowInput struct {
-	Value                   string            `json:"value,omitempty"`
+	Value                   string            `json:"value"`
 	Variables               map[string]string `json:"variables,omitempty"`
-	SkipVariableReplacement bool              `json:"skip_variable_replacement"`
+	SkipVariableReplacement bool              `json:"skip_variable_replacement,omitempty"`
 }
 
 // WorkflowOutput - https://api.slack.com/reference/workflows/workflow_step#output
