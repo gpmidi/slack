@@ -164,7 +164,7 @@ func (api *Client) getMethod(ctx context.Context, path string, token string, val
 
 //postJSON post to a slack web method using JSON
 func (api *Client) postJSON(ctx context.Context, path string, request interface{}, response interface{}) error {
-	data, err := json.Marshal(&request)
+	data, err := json.Marshal(request)
 	if err != nil {
 		return err
 	}
