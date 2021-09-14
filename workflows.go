@@ -62,5 +62,6 @@ func (api *Client) WorkflowUpdateStepContext(ctx context.Context, request Workfl
 	if err := api.postJSON(ctx, "workflows.updateStep", request, response); err != nil {
 		return err
 	}
+	api.Debugf("Response messages: %s", response.ResponseMetadata.Messages)
 	return response.Err()
 }
