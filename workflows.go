@@ -60,8 +60,13 @@ func (api *Client) WorkflowUpdateStepContext(ctx context.Context, request Workfl
 
 	response := &SlackResponse{}
 	if err := api.postJSON(ctx, "workflows.updateStep", request, response); err != nil {
+		if response != nil {
+			api.Debugf("Response messages: %s", response.ResponseMetadata.Messages)
+		}
 		return err
 	}
-	api.Debugf("Response messages: %s", response.ResponseMetadata.Messages)
+	if response != nil {
+		api.Debugf("Response messages: %s", response.ResponseMetadata.Messages)
+	}
 	return response.Err()
 }
