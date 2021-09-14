@@ -31,10 +31,10 @@ type WorkflowOutput struct {
 // WorkflowRequest - https://api.slack.com/methods/workflows.updateStep#args
 type WorkflowRequest struct {
 	TriggerID    string                    `json:"workflow_step_edit_id"`
-	StepName     string                    `json:"step_name"`
-	StepImageURL string                    `json:"step_image_url"`
-	Outputs      []*WorkflowOutput         `json:"outputs"`
-	Inputs       map[string]*WorkflowInput `json:"inputs"`
+	StepName     string                    `json:"step_name,omitempty"`
+	StepImageURL string                    `json:"step_image_url,omitempty"`
+	Outputs      []*WorkflowOutput         `json:"outputs,omitempty"`
+	Inputs       map[string]*WorkflowInput `json:"inputs,omitempty"`
 }
 
 //NewWorkflowRequest create a new workflow request object. Requires a trigger_id from a ViewRequest object that was
