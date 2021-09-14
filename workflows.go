@@ -50,23 +50,16 @@ func NewWorkflowRequest(triggerID string) WorkflowRequest {
 }
 
 // WorkflowUpdateStep notifies Slack that the workflow update in question has been handled
-func (api *Client) WorkflowUpdateStep(request WorkflowRequest) error {
+func (api *Client) WorkflowUpdateStep(request WorkflowRequest) (*SlackResponse, error) {
 	return api.WorkflowUpdateStepContext(context.Background(), request)
 }
 
 // WorkflowUpdateStepContext notifies Slack that the workflow update in question has been handled
 // https://api.slack.com/methods/workflows.updateStep
-func (api *Client) WorkflowUpdateStepContext(ctx context.Context, request WorkflowRequest) error {
-
+func (api *Client) WorkflowUpdateStepContext(ctx context.Context, request WorkflowRequest) (*SlackResponse, error) {
 	response := &SlackResponse{}
 	if err := api.postJSON(ctx, "workflows.updateStep", request, response); err != nil {
-		if response != nil {
-			api.Debugf("Response messages: %s", response.ResponseMetadata.Messages)
-		}
-		return err
+		return response, err
 	}
-	if response != nil {
-		api.Debugf("Response messages: %s", response.ResponseMetadata.Messages)
-	}
-	return response.Err()
+	return response, response.Err()
 }
