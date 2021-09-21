@@ -63,6 +63,3 @@ func (api *Client) WorkflowUpdateStepContext(ctx context.Context, request Workfl
 	}
 	return response, response.Err()
 }
-
-// bogus
-// bogus
